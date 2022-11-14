@@ -37,9 +37,16 @@ class Router
         return self::$router->generate($routeName, $params);
     }
 
-    public static function redirect(string $uri): void
+    public static function redirect(string $route): void
     {
-        header('Location: ' . $uri);
+        $url = self::generate($route);
+
+        if (!empty($url)) {
+            header('Location: ' . $url);
+        } else {
+            header('Location: ' . $route);
+        }
+
         exit();
     }
 }

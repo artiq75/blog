@@ -1,11 +1,8 @@
 <?php
 
+use App\Helpers\Auth;
 use App\Helpers\Router;
-use App\Helpers\Session;
-
-// Session::start();
-// dd($_SESSION);
-
+$user = Auth::user();
 ?>
 <!doctype html>
 <html lang="fr">
@@ -33,11 +30,12 @@ use App\Helpers\Session;
       </ul>
 
       <div class="col-md-3 text-end">
-        <?php if (!Session::get('auth')) : ?>
+        <?php if (!$user) : ?>
           <a href="<?= Router::generate('login.index') ?>" class="btn btn-outline-primary">Connexion</a>
-          <a href="<?= Router::generate('login.index') ?>" class="btn btn-primary">Inscription</a>
-        <?php else : ?>
-          <a href="<?= Router::generate('logout') ?>" class="btn btn-danger">Déconnexion</a>
+          <a href="<?= Router::generate('register.index') ?>" class="btn btn-primary">Inscription</a>
+          <?php else : ?>
+            <span><?= $user->username ?></span>
+            <a href="<?= Router::generate('logout') ?>" class="btn btn-danger">Déconnexion</a>
         <?php endif ?>
       </div>
     </header>

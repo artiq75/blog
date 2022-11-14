@@ -12,5 +12,7 @@ class Post
 
     public string $body;
 
+    public int $user_id;
+    
     public int $create_at;
 }

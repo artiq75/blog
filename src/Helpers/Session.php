@@ -4,12 +4,12 @@ namespace App\Helpers;
 
 class Session
 {
-    public static function isStart()
+    public static function isStart(): bool
     {
         return session_status() === PHP_SESSION_ACTIVE;
     }
 
-    public static function start()
+    public static function start(): void
     {
         if (!self::isStart())
         {
