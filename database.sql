@@ -1,4 +1,4 @@
--- Active: 1668334933659@@127.0.0.1@3306@blog
+-- Active: 1668415348532@@127.0.0.1@3306@blog
 
 CREATE DATABASE IF NOT EXISTS blog;
 
@@ -19,11 +19,11 @@ INSERT INTO
     posts (title, slug, body)
 VALUES (
         'Les animaux de la forêt noir',
-        'les-animaux-de-la-forêt-noir',
+        'les-animaux-de-la-foret-noir',
         'Le corps de l\'article'
     ), (
         'La révolution du Metaverse',
-        'la-révolution-du-metaverse',
+        'la-revolution-du-metaverse',
         'Le corps de l\'article'
     ), (
         'Comment internet nous influence',

@@ -1,6 +1,11 @@
+<?php
+
+use App\Helpers\Router;
+?>
+
 <h1 class="mb-4">Ajouter un nouveau article</h1>
 
-<form action="/admin/posts" method="POST">
+<form action="<?= Router::generate('admin.posts.store') ?>" method="POST">
     <div class="form-group mb-4">
         <label for="title" class="form-label">Titre</label>
         <input type="text" class="form-control" name="title" id="title">

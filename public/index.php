@@ -4,14 +4,18 @@ require '../vendor/autoload.php';
 
 use App\Controllers\HomeController;
 use App\Controllers\Admin\PostController;
+use App\Helpers\Router;
 
-$router = new AltoRouter();
+Router::map('GET', '/', [HomeController::class, "index"], 'home');
+Router::map('GET', '/admin', [PostController::class, "index"], 'admin');
+Router::map('GET', '/posts/[*:slug]', [PostController::class, "show"], 'posts.show');
+Router::map('GET', '/admin/posts/create', [PostController::class, "create"], 'admin.posts.create');
+Router::map('POST', '/admin/posts/store', [PostController::class, "store"], 'admin.posts.store');
+Router::map('GET', '/admin/posts/[i:id]/edit', [PostController::class, "edit"], 'admin.posts.edit');
+Router::map('POST', '/admin/posts/[i:id]/update', [PostController::class, "update"], 'admin.posts.update');
+Router::map('POST', '/admin/posts/[i:id]', [PostController::class, "delete"], 'admin.posts.delete');
 
-$router->map('GET', '/', [HomeController::class, "index"], 'home');
-$router->map('GET', '/admin', [PostController::class, "index"], 'admin');
-$router->map('POST', '/admin/posts/[i:id]', [PostController::class, "delete"], 'posts-delete');
-
-$match = $router->match();
+$match = Router::match();
 
 require '../layouts/header.php';
 if (is_array($match) && is_callable($match['target'])) 

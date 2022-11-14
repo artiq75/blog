@@ -1,4 +1,8 @@
-<!doctype html>
+<?php
+
+use App\Helpers\Router;
+
+?><!doctype html>
 <html lang="fr">
   <head>
     <meta charset="utf-8">
@@ -15,8 +19,8 @@
       </a>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="/" class="nav-link px-2 link-secondary">Accueil</a></li>
-        <li><a href="/admin" class="nav-link px-2 link-secondary">Admin</a></li>
+        <li><a href="<?= Router::generate('home') ?>" class="nav-link px-2 link-secondary">Accueil</a></li>
+        <li><a href="<?= Router::generate('admin') ?>" class="nav-link px-2 link-secondary">Admin</a></li>
       </ul>
 
       <div class="col-md-3 text-end">
