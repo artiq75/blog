@@ -10,10 +10,4 @@ class Request
         
         return htmlentities($_REQUEST[$key]);
     }
-
-    public static function redirect(string $uri): void
-    {
-        header('Location: ' . $uri);
-        exit();
-    }
 }
