@@ -6,6 +6,7 @@ if ($posts) : ?>
     <?php foreach ($posts as $post) : ?>
         <div class="card mb-4">
             <div class="card-body">
+                <p><?= date('d F Y', $post->created_at) ?></p>
                 <h5 class="card-title"><?= $post->title ?></h5>
                 <p class="card-text"><?= $post->body ?></p>
                 <a href="<?= Router::generate('posts.show', ['slug' => $post->slug]) ?>" class="btn btn-primary">Lire l'article</a>

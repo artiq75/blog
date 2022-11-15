@@ -14,7 +14,9 @@ use App\Helpers\Router;
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Catégrie</th>
                 <th>Titre</th>
+                <th>Publier ?</th>
                 <th>Date création</th>
                 <th>Actions</th>
             </tr>
@@ -23,7 +25,9 @@ use App\Helpers\Router;
             <?php foreach ($posts as $post) : ?>
                 <tr>
                     <td>#<?= $post->id ?></td>
+                    <td><?= $post->category_name ?></td>
                     <td><?= $post->title ?></td>
+                    <td><?= $post->is_published ? 'Oui' : 'Non' ?></td>
                     <td><?= date('d/m/Y', $post->created_at) ?></td>
                     <td class="d-flex">
                         <a href="<?= Router::generate('posts.show', ['slug' => $post->slug]) ?>" class="btn btn-info">

@@ -1,4 +1,5 @@
 <?php
+
 use App\Helpers\Router;
 ?>
 
@@ -18,6 +19,19 @@ use App\Helpers\Router;
         <textarea class="form-control" name="body" id="body">
         <?= $post->body ?? '' ?>
         </textarea>
+    </div>
+    <select name="category_id" id="category_id" class="form-select mb-4">
+        <?php foreach ($categories as $category) : ?>
+            <?php if ($category->id === $post->category_id) : ?>
+                <option value="<?= $category->id ?>" selected><?= $category->name ?></option>
+            <?php else : ?>
+                <option value="<?= $category->id ?>"><?= $category->name ?></option>
+            <?php endif ?>
+        <?php endforeach ?>
+    </select>
+    <div class="form-check mb-4">
+        <label for="is_published" class="form-check-label">Publier ?</label>
+        <input type="checkbox" class="form-check-input" name="is_published" id="is_published" <?= $post->is_published ? 'checked' : null ?>>
     </div>
     <button class="btn btn-primary" type="submit">Ajouter</button>
 </form>
