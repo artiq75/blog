@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Controllers\Auth;
 
+use App\Helpers\DB;
+use App\Helpers\Router;
+use App\Helpers\Session;
 use App\Models\User;
 
 class Auth
@@ -25,5 +28,17 @@ class Auth
         }
 
         return $user;
+    }
+    
+    public static function logout(): void
+    {
+        if (!self::id()) {
+            Router::redirect('home');
+        }
+
+        Session::start();
+        session_destroy();
+
+        Router::redirect('home');
     }
 }

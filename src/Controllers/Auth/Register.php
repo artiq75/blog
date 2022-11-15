@@ -2,11 +2,11 @@
 
 namespace App\Controllers\Auth;
 
-use App\Helpers\Auth;
 use App\Helpers\DB;
 use App\Helpers\Request;
 use App\Helpers\Router;
 use App\Helpers\Session;
+use App\Models\User;
 
 class Register
 {
@@ -33,17 +33,37 @@ class Register
             Router::redirect('register.index');
         }
 
-        $password = password_hash($password, PASSWORD_BCRYPT);
-
         $db = DB::connect();
+        $stmt = $db->prepare('SELECT * FROM users WHERE email = ?');
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+
+        if ($user !== false) {
+            Router::redirect('register.index');
+        }
+
+        $password_hashed = password_hash($password, PASSWORD_BCRYPT);
+
         $stmt = $db->prepare('INSERT INTO users (username, email, password) VALUES (?,?,?)');
-        $isOk = $stmt->execute([$username, $email, $password]);
+        $isOk = $stmt->execute([$username, $email, $password_hashed]);
 
         if (!$isOk) {
             Router::redirect('register.index');
         }
 
-        // $stmt = $db->prepare('SELECT * FROM users WHERE email = ? AND password = ?');
+        $stmt = $db->prepare('SELECT * FROM users WHERE email = ?');
+        $stmt->execute([$email]);
+        $user = $stmt->fetchObject(User::class);
+
+        if ($user === false) {
+            Router::redirect('register.index');
+        }
+        
+        if (!password_verify($password, $user->password)) {
+            Router::redirect('login.index');
+        }
+
+        Session::set(['auth' => $user->id]);
 
         Router::redirect('home');
     }

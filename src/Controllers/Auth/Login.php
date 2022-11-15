@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Auth;
 
-use App\Helpers\Auth;
 use App\Helpers\DB;
 use App\Helpers\Request;
 use App\Helpers\Router;
@@ -34,7 +33,7 @@ class Login
 
         $db = DB::connect();
         $stmt = $db->prepare('SELECT * FROM users WHERE email = ?');
-        !$stmt->execute([$email, $password]);
+        $stmt->execute([$email]);
         $user = $stmt->fetch();
 
         if ($user === false) {
@@ -46,18 +45,6 @@ class Login
         }
 
         Session::set(['auth' => $user->id]);
-
-        Router::redirect('home');
-    }
-
-    public static function logout(): void
-    {
-        if (!Auth::id()) {
-            Router::redirect('home');
-        }
-
-        Session::start();
-        session_destroy();
 
         Router::redirect('home');
     }

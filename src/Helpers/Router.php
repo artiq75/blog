@@ -10,12 +10,11 @@ class Router
 
     public static function init(): void
     {
-        if (!isset(self::$router))
-        {
+        if (!isset(self::$router)) {
             self::$router = new AltoRouter();
         }
     }
-    
+
     public static function map(string $method, string $route, callable $target, string $name = null): void
     {
         self::init();
@@ -26,7 +25,7 @@ class Router
     public static function match(): array
     {
         self::init();
-        
+
         return self::$router->match();
     }
 
@@ -41,12 +40,11 @@ class Router
     {
         $url = self::generate($route);
 
-        if (!empty($url)) {
-            header('Location: ' . $url);
-        } else {
-            header('Location: ' . $route);
+        if (empty($url)) {
+            $url = $route;
         }
-
+        
+        header('Location: ' . $url);
         exit();
     }
 }

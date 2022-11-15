@@ -1,6 +1,6 @@
 <?php
 
-use App\Helpers\Auth;
+use App\Controllers\Auth\Auth;
 use App\Helpers\Router;
 $user = Auth::user();
 ?>

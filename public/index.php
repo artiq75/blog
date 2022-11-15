@@ -4,6 +4,7 @@ require '../vendor/autoload.php';
 
 use App\Controllers\HomeController;
 use App\Controllers\Admin\PostController;
+use App\Controllers\Auth\Auth;
 use App\Controllers\Auth\Login;
 use App\Controllers\Auth\Register;
 use App\Helpers\Router;
@@ -11,7 +12,7 @@ use App\Helpers\Router;
 Router::map('GET', '/', [HomeController::class, "index"], 'home');
 Router::map('GET', '/connexion', [Login::class, "index"], 'login.index');
 Router::map('POST', '/connexion', [Login::class, "login"], 'login');
-Router::map('GET', '/deconnexion', [Login::class, "logout"], 'logout');
+Router::map('GET', '/deconnexion', [Auth::class, "logout"], 'logout');
 Router::map('GET', '/inscription', [Register::class, "index"], 'register.index');
 Router::map('POST', '/inscription', [Register::class, "register"], 'register');
 Router::map('GET', '/admin', [PostController::class, "index"], 'admin');
