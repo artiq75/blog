@@ -2,6 +2,7 @@
 
 use App\Controllers\Auth\Auth;
 use App\Helpers\Router;
+
 $user = Auth::user();
 ?>
 <!doctype html>
@@ -26,16 +27,18 @@ $user = Auth::user();
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="<?= Router::generate('home') ?>" class="nav-link px-2 link-secondary">Accueil</a></li>
-        <li><a href="<?= Router::generate('admin') ?>" class="nav-link px-2 link-secondary">Admin</a></li>
+        <?php if ($user) : ?>
+          <li><a href="<?= Router::generate('admin') ?>" class="nav-link px-2 link-secondary">Admin</a></li>
+        <?php endif ?>
       </ul>
 
       <div class="col-md-3 text-end">
         <?php if (!$user) : ?>
           <a href="<?= Router::generate('login.index') ?>" class="btn btn-outline-primary">Connexion</a>
           <a href="<?= Router::generate('register.index') ?>" class="btn btn-primary">Inscription</a>
-          <?php else : ?>
-            <span><?= $user->username ?></span>
-            <a href="<?= Router::generate('logout') ?>" class="btn btn-danger">Déconnexion</a>
+        <?php else : ?>
+          <span><?= $user->username ?></span>
+          <a href="<?= Router::generate('logout') ?>" class="btn btn-danger">Déconnexion</a>
         <?php endif ?>
       </div>
     </header>

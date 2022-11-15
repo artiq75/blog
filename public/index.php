@@ -16,7 +16,7 @@ Router::map('GET', '/deconnexion', [Auth::class, "logout"], 'logout');
 Router::map('GET', '/inscription', [Register::class, "index"], 'register.index');
 Router::map('POST', '/inscription', [Register::class, "register"], 'register');
 Router::map('GET', '/admin', [PostController::class, "index"], 'admin');
-Router::map('GET', '/posts/[*:slug]', [PostController::class, "show"], 'posts.show');
+Router::map('GET', '/articles/[*:slug]', [PostController::class, "show"], 'posts.show');
 Router::map('GET', '/admin/posts/create', [PostController::class, "create"], 'admin.posts.create');
 Router::map('POST', '/admin/posts/store', [PostController::class, "store"], 'admin.posts.store');
 Router::map('GET', '/admin/posts/[i:id]/edit', [PostController::class, "edit"], 'admin.posts.edit');

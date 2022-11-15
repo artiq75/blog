@@ -1,4 +1,4 @@
--- Active: 1668334933659@@127.0.0.1@3306@blog
+-- Active: 1668415348532@@127.0.0.1@3306@blog
 
 CREATE DATABASE IF NOT EXISTS blog;
 
@@ -33,7 +33,7 @@ INSERT INTO
 VALUES (
         'tariq',
         'tariq@email.dev',
-        'password'
+        '$2y$10$j7mfQLgsfQ5Eav8WdfrIZ.vtmVdnirkAg07.r3rE0lDyBsjuP9aj.'
     );
 
 INSERT INTO

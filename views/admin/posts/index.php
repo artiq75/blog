@@ -7,13 +7,14 @@ use App\Helpers\Router;
 
 <a href="<?= Router::generate('admin.posts.create') ?>" class="btn btn-primary mb-4">Créer un nouvelle article</a>
 
-<?php if ($posts) : ?>
+<?php if (!$posts) : ?>
+    <h2>Vous n'avez aucun article</h2>
+<?php else : ?>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Titre</th>
-                <th>Corps</th>
                 <th>Date création</th>
                 <th>Actions</th>
             </tr>
@@ -23,7 +24,6 @@ use App\Helpers\Router;
                 <tr>
                     <td>#<?= $post->id ?></td>
                     <td><?= $post->title ?></td>
-                    <td><?= $post->body ?></td>
                     <td><?= date('d/m/Y', $post->created_at) ?></td>
                     <td class="d-flex">
                         <a href="<?= Router::generate('posts.show', ['slug' => $post->slug]) ?>" class="btn btn-info">

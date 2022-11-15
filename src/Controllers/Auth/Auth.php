@@ -29,6 +29,11 @@ class Auth
 
         return $user;
     }
+
+    public static function check(): bool
+    {
+        return self::id() !== null;
+    }
     
     public static function logout(): void
     {
