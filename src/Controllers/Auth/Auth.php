@@ -5,26 +5,24 @@ namespace App\Controllers\Auth;
 use App\Helpers\DB;
 use App\Helpers\Router;
 use App\Helpers\Session;
-use App\Models\User;
 
 class Auth
 {
-
     public static function id(): ?int
     {
         return Session::get('auth');
     }
 
-    public static function user(): ?User
+    public static function user(): ?object
     {
         $id = self::id();
         $user = null;
-
+        
         if ($id) {
             $db = DB::connect();
             $stmt = $db->prepare('SELECT * FROM users WHERE id = ?');
             $stmt->execute([$id]);
-            $user = $stmt->fetchObject(User::class);
+            $user = $stmt->fetchObject();
         }
 
         return $user;

@@ -6,7 +6,6 @@ use App\Helpers\DB;
 use App\Helpers\Request;
 use App\Helpers\Router;
 use App\Helpers\Session;
-use App\Models\User;
 
 class Register
 {
@@ -38,7 +37,7 @@ class Register
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
-        if ($user !== false) {
+        if ($user) {
             Router::redirect('register.index');
         }
 
@@ -53,9 +52,9 @@ class Register
 
         $stmt = $db->prepare('SELECT * FROM users WHERE email = ?');
         $stmt->execute([$email]);
-        $user = $stmt->fetchObject(User::class);
+        $user = $stmt->fetchObject();
 
-        if ($user === false) {
+        if (!$user) {
             Router::redirect('register.index');
         }
         

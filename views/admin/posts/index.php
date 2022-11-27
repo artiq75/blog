@@ -29,18 +29,23 @@ use App\Helpers\Router;
                     <td><?= $post->title ?></td>
                     <td><?= $post->is_published ? 'Oui' : 'Non' ?></td>
                     <td><?= date('d/m/Y', $post->created_at) ?></td>
+
                     <td class="d-flex">
+
                         <a href="<?= Router::generate('posts.show', ['slug' => $post->slug]) ?>" class="btn btn-info">
                             <i class="bi bi-eye"></i>
                         </a>
+
                         <a href="<?= Router::generate('admin.posts.edit', ['id' => $post->id]) ?>" class="btn btn-primary">
                             <i class="bi bi-pen"></i>
                         </a>
+
                         <form action="<?= Router::generate('admin.posts.delete', ['id' => $post->id]) ?>" method="POST">
                             <button class="btn btn-danger" type="submit">
                                 <i class="bi bi-trash"></i>
                             </button>
                         </form>
+                        
                     </td>
                 </tr>
             <?php endforeach ?>
