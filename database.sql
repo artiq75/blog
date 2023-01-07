@@ -1,4 +1,4 @@
--- Active: 1669400983478@@127.0.0.1@3306@blog
+-- Active: 1673114088437@@127.0.0.1@3307@blog
 
 CREATE DATABASE IF NOT EXISTS blog;
 
@@ -13,22 +13,22 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE
     IF NOT EXISTS users (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        username TINYTEXT NOT NULL,
-        email TINYTEXT NOT NULL UNIQUE,
-        password TINYTEXT NOT NULL
+        username VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL UNIQUE,
+        password VARCHAR(255) NOT NULL
     );
 
 CREATE TABLE
     IF NOT EXISTS categories (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        name TINYTEXT NOT NULL
+        name VARCHAR(255) NOT NULL
     );
 
 CREATE TABLE
     IF NOT EXISTS posts (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        title TINYTEXT NOT NULL UNIQUE,
-        slug TINYTEXT NOT NULL UNIQUE,
+        title VARCHAR(255) NOT NULL UNIQUE,
+        slug VARCHAR(255) NOT NULL UNIQUE,
         body TEXT NOT NULL,
         is_published BOOLEAN NOT NULL DEFAULT 0,
         created_at INT NOT NULL DEFAULT UNIX_TIMESTAMP(),
