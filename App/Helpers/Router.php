@@ -22,7 +22,7 @@ class Router
         self::$router->map($method, $route, $target, $name);
     }
 
-    public static function match(): array
+    public static function match(): array|bool
     {
         self::init();
 

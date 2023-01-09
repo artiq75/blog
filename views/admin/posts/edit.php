@@ -1,11 +1,20 @@
 <?php
 
 use App\Helpers\Router;
+
+$action = Router::generate('admin.posts.store');
+$submitLabel = 'Ajouter';
+
+if (!empty($post)) {
+    $submitLabel = 'Modifier';
+    $action = Router::generate('admin.posts.update', ['id' => $post->id]);
+}
+
 ?>
 
 <h1 class="mb-4">Modification: <?= $post->title ?></h1>
 
-<form action="<?= Router::generate('admin.posts.update', ['id' => $post->id]) ?>" method="POST">
+<form action="<?= $action ?>" method="POST">
 
     <div class="form-group mb-4">
         <label for="title" class="form-label">Titre</label>
@@ -25,12 +34,10 @@ use App\Helpers\Router;
     </div>
 
     <select name="category_id" id="category_id" class="form-select mb-4">
-        <?php foreach ($categories as $category) : ?>
-            <?php if ($category->id === $post->category_id) : ?>
-                <option value="<?= $category->id ?>" selected><?= $category->name ?></option>
-            <?php else : ?>
-                <option value="<?= $category->id ?>"><?= $category->name ?></option>
-            <?php endif ?>
+        <?php foreach ($categories as $category): ?>
+            <option value="<?= $category->id ?>" <?=($category->id === $post->category_id) ? 'selected' : '' ?>>
+                <?= $category->name ?>
+            </option>
         <?php endforeach ?>
     </select>
 
@@ -38,6 +45,8 @@ use App\Helpers\Router;
         <label for="is_published" class="form-check-label">Publier ?</label>
         <input type="checkbox" class="form-check-input" name="is_published" id="is_published" <?= $post->is_published ? 'checked' : null ?>>
     </div>
-    
-    <button class="btn btn-primary" type="submit">Ajouter</button>
+
+    <button class="btn btn-primary" type="submit">
+        <?= $submitLabel ?> l'article
+    </button>
 </form>

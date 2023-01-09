@@ -6,7 +6,7 @@ use PDO;
 
 class DB
 {
-    private static $pdo;
+    private static PDO $pdo;
 
     private const ENGINE = 'mysql';
 

@@ -61,7 +61,7 @@ class PostController
         $statement = $db->query('SELECT * FROM categories');
         $categories = $statement->fetchAll();
 
-        require dirname(__DIR__, 3) . '/views/admin/posts/create.php';
+        require dirname(__DIR__, 3) . '/views/admin/posts/edit.php';
     }
 
     public static function store(): void
